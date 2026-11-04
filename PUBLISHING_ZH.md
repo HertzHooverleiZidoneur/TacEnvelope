@@ -48,4 +48,4 @@ git credential-manager github login --username HertzHooverleiZidoneur --force
 - 发布目录中的论文与视频 SHA-256 与你提供的原文件完全一致。
 - 修正了一处原有测试对 Windows 路径分隔符的断言，算法源文件保持原样。
 - 浏览器自动化因无法可靠识别当前网址而停止，因此未完成页面的浏览器视觉实测。
-- 当前版本仅在本地准备，尚未推送或修改实验室官网。
+- 已发布到个人仓库并启用 GitHub Pages，云端测试和部署均通过；实验室官网未修改。
