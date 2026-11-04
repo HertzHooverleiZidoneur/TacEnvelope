@@ -1,0 +1,32 @@
+{
+  "criterion": "fixed_upper",
+  "task": "USB insertion",
+  "threshold_N": 65.07912845611573,
+  "threshold_statistic": "train bilateral stable-contact q0.9",
+  "quantile": 0.9,
+  "source_split": "train",
+  "test_or_calibration_used": false,
+  "train_windows_total": 8521,
+  "train_bilateral_stable_windows": 4393,
+  "target": "0.5 * (left_filtered_top2_mean + right_filtered_top2_mean)",
+  "gate": {
+    "per_side": true,
+    "tau_on_N": 5.0,
+    "recent_samples": 4,
+    "required_samples_above_tau_on": 3,
+    "bilateral_required": true
+  },
+  "force_distribution_N": {
+    "mean": 49.80271971997763,
+    "std": 14.051133475292808,
+    "p50": 51.90604782104492,
+    "p90": 65.07912845611573,
+    "p95": 68.04129352569579,
+    "max": 86.03987503051758
+  },
+  "windows_path": "/path/to/tactile_force_envelope/outputs/training/franka_tactile310/pi05_jax_zrl_envelope_v1/windows.jsonl",
+  "windows_sha256": "4500e62a20da159574dc2169b5bea35a53eed9f9a4e037ed505cfdd9974930a8",
+  "history_path": "/path/to/tactile_force_envelope/outputs/training/franka_tactile310/pi05_jax_zrl_envelope_v1/causal_tactile_history.pt",
+  "history_sha256": "b451e7bc05115758b4c5217022fdfbe74ddfa885ec9f2d98f1ad956332a3bf03",
+  "generated_at_utc": "2026-09-08T03:07:11.504902+00:00"
+}

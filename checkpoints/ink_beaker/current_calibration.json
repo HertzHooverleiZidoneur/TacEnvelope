@@ -1,0 +1,22 @@
+{
+  "mode": "stable_contact_sustained_only",
+  "coverage": 0.95,
+  "window_ms": 300,
+  "history_ms": 200,
+  "tau_on": 5.0,
+  "tau_off": 3.0,
+  "tau_train": 5.0,
+  "entry_rule": "at least 3 of the last 4 valid pre-anchor samples > tau_on",
+  "selection": "causal stable-prior gate AND future filtered_top2_mean > tau_train",
+  "selection_future_label_is_offline_only": true,
+  "alpha95_left": 1.3829646110534668,
+  "q95_left": 1.1420936584472656,
+  "samples_left": 583,
+  "finite_sample_rank_scale_left": 555,
+  "finite_sample_rank_additive_left": 555,
+  "alpha95_right": 1.1112481355667114,
+  "q95_right": 1.1460161209106445,
+  "samples_right": 784,
+  "finite_sample_rank_scale_right": 746,
+  "finite_sample_rank_additive_right": 746
+}

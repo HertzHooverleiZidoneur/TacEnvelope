@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "method": "bilateral_stable_contact_average_additive_envelope",
+  "checkpoint": "/path/to/tactile_force_envelope/outputs/training/franka_tactile310/pi05_jax_zrl_envelope_v1/sustained_contact_seed_44/stable_evaluation/stable_contact_calibrated_checkpoint.pt",
+  "checkpoint_sha256": "0061b41db0685e00782ea1449a7cebf857eb0381f37a2e7e10e308a41dc0a7e0",
+  "selection": "stable_prior_left AND stable_prior_right",
+  "selection_uses_future_target": false,
+  "lower_coverage": 0.05,
+  "lower_quantile_label": "q05",
+  "lower_quantile_N": -1.7059867858886717,
+  "lower_quantile_source": "calibration split empirical 0.05 quantile of y_avg - mu_avg",
+  "active_coverage": 0.9,
+  "active_quantile_label": "q90",
+  "active_quantile_N": 1.641775131225586,
+  "active_quantile_source": "calibration split empirical 0.90 quantile of y_avg - mu_avg",
+  "q90_N": 1.641775131225586,
+  "q90_source": "calibration split empirical 0.90 quantile of y_avg - mu_avg",
+  "q95_N": 2.8379318237304685,
+  "q95_source": "calibration split empirical 0.95 quantile of y_avg - mu_avg",
+  "calibration_samples": 580,
+  "test_not_used_for_lower_quantile": true,
+  "test_not_used_for_active_quantile": true,
+  "test_not_used_for_q95": true,
+  "raw_peak_threshold": {
+    "source": "maximum zero-biased raw bilateral force magnitude over train split windows plus 10 N",
+    "train_samples": 8521,
+    "train_raw_max_N": 97.19593048095703,
+    "offset_N": 10.0,
+    "threshold_N": 107.19593048095703,
+    "uses_validation_calibration_or_test": false
+  },
+  "test_report": {
+    "samples": 598,
+    "mae_N": 1.3229142427444458,
+    "active_quantile_label": "q90",
+    "coverage": 0.9046822742474916,
+    "false_penalty_windows": 57,
+    "episodes": 31,
+    "episodes_with_false_penalty": 25,
+    "used_to_adjust_active_quantile": false
+  },
+  "q95_reference_test_report": {
+    "samples": 598,
+    "coverage": 0.9464882943143813,
+    "false_penalty_windows": 32,
+    "episodes": 31,
+    "episodes_with_false_penalty": 19
+  },
+  "independent_envelope_test_comparison": {
+    "coverage": 0.919732441471572,
+    "false_penalty_windows": 48,
+    "episodes_with_false_penalty": 26
+  }
+}

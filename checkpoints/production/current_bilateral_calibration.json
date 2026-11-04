@@ -1,0 +1,149 @@
+{
+  "method": "bilateral_stable_contact_average_additive_envelope",
+  "formula": {
+    "y_avg": "0.5 * (y_left + y_right)",
+    "mu_avg": "0.5 * (mu_left + mu_right)",
+    "upper_avg": "mu_avg + q95"
+  },
+  "selection": "both causal stable-contact gates are true",
+  "future_target_used_for_selection": false,
+  "false_penalty_definition": "observed target exceeds its calibrated upper envelope",
+  "q95_uses_calibration_only": true,
+  "development_test_used_for_tuning": false,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "checkpoint": "/path/to/gello_software/artifacts/franka_tactile310/force_envelope_transformer_v3/stable_contact_ab/B_seed_42/stable_evaluation/stable_contact_calibrated_checkpoint.pt",
+      "selection": "stable_prior_left AND stable_prior_right",
+      "selection_uses_future_target": false,
+      "calibration_samples": 633,
+      "test_samples": 649,
+      "q95": 1.6915061473846436,
+      "q95_source": "calibration split empirical 0.95 quantile of y_avg - mu_avg",
+      "test_not_used_for_q95": true,
+      "mae": 1.1315943002700806,
+      "coverage": 0.9167950693374423,
+      "mean_envelope_width": 1.6915061473846436,
+      "false_penalty_windows": 54,
+      "episodes": 31,
+      "episodes_with_false_penalty": 23,
+      "independent_additive_comparison": {
+        "q95_left": 1.3939971923828125,
+        "q95_right": 4.346019744873047,
+        "joint_coverage": 0.8505392912172574,
+        "false_penalty_windows": 97,
+        "episodes_with_false_penalty": 28,
+        "definition": "penalty if either independently calibrated side is exceeded"
+      }
+    },
+    {
+      "seed": 43,
+      "checkpoint": "/path/to/gello_software/artifacts/franka_tactile310/force_envelope_transformer_v3/stable_contact_ab/B_seed_43/stable_evaluation/stable_contact_calibrated_checkpoint.pt",
+      "selection": "stable_prior_left AND stable_prior_right",
+      "selection_uses_future_target": false,
+      "calibration_samples": 633,
+      "test_samples": 649,
+      "q95": 1.5913465023040771,
+      "q95_source": "calibration split empirical 0.95 quantile of y_avg - mu_avg",
+      "test_not_used_for_q95": true,
+      "mae": 1.016626000404358,
+      "coverage": 0.9167950693374423,
+      "mean_envelope_width": 1.5913465023040771,
+      "false_penalty_windows": 54,
+      "episodes": 31,
+      "episodes_with_false_penalty": 25,
+      "independent_additive_comparison": {
+        "q95_left": 1.8797531127929688,
+        "q95_right": 2.5128707885742188,
+        "joint_coverage": 0.8412942989214176,
+        "false_penalty_windows": 103,
+        "episodes_with_false_penalty": 28,
+        "definition": "penalty if either independently calibrated side is exceeded"
+      }
+    },
+    {
+      "seed": 44,
+      "checkpoint": "/path/to/gello_software/artifacts/franka_tactile310/force_envelope_transformer_v3/stable_contact_ab/B_seed_44/stable_evaluation/stable_contact_calibrated_checkpoint.pt",
+      "selection": "stable_prior_left AND stable_prior_right",
+      "selection_uses_future_target": false,
+      "calibration_samples": 633,
+      "test_samples": 649,
+      "q95": 1.7767592668533325,
+      "q95_source": "calibration split empirical 0.95 quantile of y_avg - mu_avg",
+      "test_not_used_for_q95": true,
+      "mae": 0.9755105376243591,
+      "coverage": 0.9322033898305084,
+      "mean_envelope_width": 1.7767592668533325,
+      "false_penalty_windows": 44,
+      "episodes": 31,
+      "episodes_with_false_penalty": 23,
+      "independent_additive_comparison": {
+        "q95_left": 1.8835487365722656,
+        "q95_right": 3.104259490966797,
+        "joint_coverage": 0.8782742681047766,
+        "false_penalty_windows": 79,
+        "episodes_with_false_penalty": 27,
+        "definition": "penalty if either independently calibrated side is exceeded"
+      }
+    }
+  ],
+  "aggregate_mean_std": {
+    "mae": {
+      "mean": 1.0412436127662659,
+      "std": 0.06605581160005201
+    },
+    "coverage": {
+      "mean": 0.9219311761684642,
+      "std": 0.007263551938228493
+    },
+    "mean_envelope_width": {
+      "mean": 1.6865373055140178,
+      "std": 0.07577594322123113
+    },
+    "false_penalty_windows": {
+      "mean": 50.666666666666664,
+      "std": 4.714045207910317
+    },
+    "episodes_with_false_penalty": {
+      "mean": 23.666666666666668,
+      "std": 0.9428090415820634
+    }
+  },
+  "std_definition": "population standard deviation across the three seeds",
+  "independent_additive_mean_std": {
+    "joint_coverage": {
+      "mean": 0.8567026194144839,
+      "std": 0.015713465373167278
+    },
+    "false_penalty_windows": {
+      "mean": 93.0,
+      "std": 10.198039027185569
+    },
+    "episodes_with_false_penalty": {
+      "mean": 27.666666666666668,
+      "std": 0.4714045207910317
+    }
+  },
+  "relative_false_penalty_window_reduction": 0.45519713261648753,
+  "relative_false_penalty_episode_reduction": 0.14457831325301207,
+  "coverage_in_93_97": false,
+  "fewer_false_penalty_windows_than_independent": true,
+  "fewer_false_penalty_episodes_than_independent": true,
+  "curve_plot": "/path/to/gello_software/artifacts/franka_tactile310/force_envelope_transformer_v3/stable_contact_ab/bilateral_average_evaluation/bilateral_average_episode_curves_seed_44.png",
+  "curve_seed": 44,
+  "curve_episodes": [
+    44,
+    114,
+    52,
+    128,
+    219,
+    234
+  ],
+  "production_ready": false,
+  "note": "Development test is reported once and was not used to adjust q95."
+}

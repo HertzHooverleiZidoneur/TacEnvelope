@@ -1,0 +1,107 @@
+data:
+  collection_manifest: /path/to/VLA_RL_dataset/franka_usb_tactile_310_20260716/manifest.json
+  robot_dataset: /path/to/VLA_RL_dataset/franka_usb_tactile_310_20260716/source_frames/franka_lerobot_20260715_170207_tactile
+  tactile_root: /path/to/VLA_RL_dataset/franka_usb_tactile_310_20260716/tactile_raw/franka_lerobot_20260715_170207_tactile
+  output_dir: /path/to/tactile_force_envelope/outputs/training/franka_tactile310/pi05_jax_zrl_envelope_v1
+  timestamp_field: null
+  state_field: null
+  action_field: null
+  image_fields: null
+  task_field: task
+  action_sequence_available_at_anchor: false
+
+alignment:
+  window_ms: 300
+  anchor_mode: auto
+  anchor_stride_ms: 300
+  action_steps: 9
+  min_tactile_samples: 4
+  min_samples_per_sensor: 4
+  expected_sensors: [left_tip, right_tip]
+  max_image_age_ms: 70
+  drop_low_quality: true
+
+causal_tactile_history:
+  history_ms: 200
+  steps: 6
+  interpolation: false
+
+stable_contact:
+  raw_peak_offset_N: 10.0
+  tau_on: 5.0
+  tau_off: 3.0
+  tau_train: 5.0
+  recent_samples: 4
+  required_samples: 3
+  magnitude_index: 3
+  force_scale: 5.0
+  cost_clip: 1.0
+  hard_force_limit: null
+  source_checkpoint: /path/to/tactile_force_envelope/outputs/training/franka_tactile310/pi05_jax_zrl_envelope_v1/sustained_contact_seed_44/transformer_force_envelope_model.pt
+  evaluation_output_dir: /path/to/tactile_force_envelope/outputs/training/franka_tactile310/pi05_jax_zrl_envelope_v1/sustained_contact_seed_44/stable_evaluation
+
+label:
+  target_type: per_side_filtered_top2_mean
+  sensor_names:
+    left: left_tip
+    right: right_tip
+  baseline_ms: 1000
+  gripper_index: -1
+  baseline_min_open: 0.95
+  baseline_max_residual_p95: 1.0
+  require_contact_free_baseline: true
+  contact_threshold: 5.0
+  median_filter_size: 3
+  force_axes: [force_fx, force_fy, force_fz]
+
+vision:
+  encoder: pi05_jax_z_rl
+  checkpoint: /path/to/tactile_model/24999
+  feature_dim: 512
+  feature_tap: joint JAX RLTPolicy response.z_rl
+  pooling: none
+  feature_contains_language: true
+  feature_contains_robot_state: false
+  server_host: 127.0.0.1
+  server_port: 8011
+  camera_order:
+    - observation.images.camera_camera_1_color_image_raw
+    - observation.images.camera_camera_2_color_image_raw
+    - observation.images.d515_color_image_raw
+  batch_size: 8
+  num_workers: 0
+
+model:
+  model_type: transformer_envelope
+  d_model: 256
+  num_heads: 8
+  ffn_dim: 1024
+  num_layers: 2
+  dropout: 0.1
+  log_var_min: -8.0
+  log_var_max: 4.0
+  use_tactile_history: true
+
+training:
+  seed: 44
+  train_ratio: 0.70
+  validation_ratio: 0.10
+  calibration_ratio: 0.10
+  test_ratio: 0.10
+  batch_size: 128
+  epochs: 80
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  num_workers: 2
+  device: cuda
+  coverage: 0.95
+  mixed_precision: true
+  grad_clip: 1.0
+  minimum_epochs: 20
+  early_stopping_patience: 15
+  early_stopping_min_delta: 0.0001
+  objective: sustained_contact
+  contact_sample_weight: 1.0
+  smooth_l1_weight: 0.5
+  artifact_subdir: sustained_contact_seed_44
+  sampling_rate_bins_hz: [18.0, 21.0]

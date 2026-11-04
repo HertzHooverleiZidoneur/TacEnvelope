@@ -1,0 +1,55 @@
+data:
+  robot_dataset: /path/to/VLA_RL_dataset/franka_lerobot_20260715_170207_tactile_training_mirror
+  tactile_root: /path/to/VLA_RL_dataset/franka_remote_tactile/franka_lerobot_20260715_170207_tactile
+  output_dir: /path/to/VLA_RL_dataset/tactile_force_envelope_20260715
+  # Leave fields null to discover them from meta/info.json and the first valid row.
+  timestamp_field: null
+  state_field: null
+  action_field: null
+  image_fields: null
+  task_field: task
+
+alignment:
+  window_ms: 300
+  # This recording has no action_chunk_id. A 300 ms stride is an explicit fallback.
+  anchor_mode: auto
+  anchor_stride_ms: 300
+  action_steps: null
+  min_tactile_samples: 4
+  min_samples_per_sensor: 0
+  max_image_age_ms: 200
+  drop_low_quality: true
+
+label:
+  target_type: top2_mean
+  baseline_ms: 1000
+  median_filter_size: 3
+  force_axes: [force_fx, force_fy, force_fz]
+
+vision:
+  encoder: resnet18
+  weights: default
+  image_size: 224
+  batch_size: 64
+
+model:
+  hidden_dim: 256
+  branch_dim: 128
+  task_embedding_dim: 32
+  dropout: 0.1
+  log_var_min: -8.0
+  log_var_max: 4.0
+
+training:
+  seed: 42
+  train_ratio: 0.70
+  calibration_ratio: 0.15
+  test_ratio: 0.15
+  batch_size: 128
+  epochs: 30
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  num_workers: 0
+  device: auto
+  coverage: 0.95
+

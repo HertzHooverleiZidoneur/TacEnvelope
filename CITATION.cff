@@ -1,0 +1,53 @@
+cff-version: 1.2.0
+message: "If you use TacEnvelope, please cite the paper below."
+type: software
+title: "TacEnvelope"
+version: 0.1.0
+license: Apache-2.0
+repository-code: "https://github.com/HertzHooverleiZidoneur/TacEnvelope"
+authors:
+  - family-names: Hu
+    given-names: Huanzhang
+  - family-names: Chen
+    given-names: Bo
+  - family-names: Yu
+    given-names: Fangdi
+  - family-names: Zhang
+    given-names: Haoyi
+  - family-names: Lai
+    given-names: Xianxin
+  - family-names: Chen
+    given-names: Jiahui
+  - family-names: Chen
+    given-names: Haijier
+  - family-names: Sun
+    given-names: Xiaoquan
+  - family-names: Zheng
+    given-names: Dongchen
+  - family-names: Hong
+    given-names: Yijun
+  - family-names: Chen
+    given-names: Zurui
+  - family-names: Ge
+    given-names: Wenqi
+  - family-names: Chen
+    given-names: Jiayu
+preferred-citation:
+  type: unpublished
+  title: "TacEnvelope: A Plug-in Framework for Utilizing Tactile Envelope Feedback in RL Post-Training of VLA Policies"
+  year: 2026
+  url: "https://agentic-intelligence-lab.org/files/TacEnvelope.pdf"
+  authors:
+    - {family-names: Hu, given-names: Huanzhang}
+    - {family-names: Chen, given-names: Bo}
+    - {family-names: Yu, given-names: Fangdi}
+    - {family-names: Zhang, given-names: Haoyi}
+    - {family-names: Lai, given-names: Xianxin}
+    - {family-names: Chen, given-names: Jiahui}
+    - {family-names: Chen, given-names: Haijier}
+    - {family-names: Sun, given-names: Xiaoquan}
+    - {family-names: Zheng, given-names: Dongchen}
+    - {family-names: Hong, given-names: Yijun}
+    - {family-names: Chen, given-names: Zurui}
+    - {family-names: Ge, given-names: Wenqi}
+    - {family-names: Chen, given-names: Jiayu}

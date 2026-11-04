@@ -1,0 +1,90 @@
+data:
+  collection_manifest: /path/to/VLA_RL_dataset/franka_usb_tactile_310_20260716/manifest.json
+  robot_dataset: /path/to/VLA_RL_dataset/franka_usb_tactile_310_20260716/source_frames/franka_lerobot_20260715_170207_tactile
+  tactile_root: /path/to/VLA_RL_dataset/franka_usb_tactile_310_20260716/tactile_raw/franka_lerobot_20260715_170207_tactile
+  output_dir: /path/to/tactile_force_envelope/outputs/training/franka_tactile310/force_envelope_transformer_v3
+  timestamp_field: null
+  state_field: null
+  action_field: null
+  image_fields: null
+  task_field: task
+  action_sequence_available_at_anchor: false
+
+alignment:
+  window_ms: 300
+  anchor_mode: auto
+  anchor_stride_ms: 300
+  action_steps: 9
+  min_tactile_samples: 4
+  min_samples_per_sensor: 4
+  expected_sensors: [left_tip, right_tip]
+  max_image_age_ms: 70
+  drop_low_quality: true
+
+label:
+  target_type: per_side_filtered_top2_mean
+  sensor_names:
+    left: left_tip
+    right: right_tip
+  baseline_ms: 1000
+  gripper_index: -1
+  baseline_min_open: 0.95
+  baseline_max_residual_p95: 1.0
+  require_contact_free_baseline: true
+  contact_threshold: 5.0
+  median_filter_size: 3
+  force_axes: [force_fx, force_fy, force_fz]
+
+vision:
+  encoder: smolvla_condition
+  checkpoint: /path/to/lerobot/outputs/train/franka_tactile310_smolvla_b64_e10_20260717_152937/checkpoints/last/pretrained_model
+  feature_tap: policy.model.vlm_with_expert.forward_past_key_values
+  pooling: per_layer_key_value_masked_token_mean_then_head_mean_then_concat
+  feature_contains_language: true
+  feature_contains_robot_state: true
+  camera_order:
+    - observation.images.camera_camera_1_color_image_raw
+    - observation.images.camera_camera_2_color_image_raw
+    - observation.images.d515_color_image_raw
+  batch_size: 32
+  num_workers: 8
+
+model:
+  model_type: transformer_envelope
+  d_model: 256
+  num_heads: 8
+  ffn_dim: 1024
+  num_layers: 2
+  dropout: 0.1
+  log_var_min: -8.0
+  log_var_max: 4.0
+
+training:
+  seed: 42
+  train_ratio: 0.70
+  validation_ratio: 0.10
+  calibration_ratio: 0.10
+  test_ratio: 0.10
+  batch_size: 128
+  epochs: 80
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  num_workers: 0
+  device: cuda
+  coverage: 0.95
+  mixed_precision: true
+  grad_clip: 1.0
+  minimum_epochs: 20
+  early_stopping_patience: 15
+  early_stopping_min_delta: 0.0001
+  contact_sample_weight: 1.0
+  smooth_l1_weight: 0.5
+  contact_recalibration_checkpoint: /path/to/tactile_force_envelope/outputs/training/franka_tactile310/force_envelope_transformer_v3/contact_weight_sweep/weight_1.5_seed_44/transformer_force_envelope_model.pt
+  contact_recalibration_output_dir: /path/to/tactile_force_envelope/outputs/training/franka_tactile310/force_envelope_transformer_v3/contact_recalibration_weight_1.5_seed_44
+  old_mlp_metrics: /path/to/tactile_force_envelope/outputs/training/franka_tactile310/force_envelope_v2/test_metrics.json
+  sampling_rate_bins_hz: [18.0, 21.0]
+
+sweep:
+  contact_weights: [1.0, 1.5, 2.0]
+  seeds: [42, 43, 44]
+  parallel_seeds: 1
